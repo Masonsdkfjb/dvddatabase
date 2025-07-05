@@ -1,25 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>My DVD Database</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
-    h1 { color: #2c3e50; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    #searchBox {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.5rem;
+      width: 50%;
+      font-size: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f3f3f3;
+    }
+    tr.hide {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <h1>My DVD Collection</h1>
-  <table id="dvd-table">
+  <h1>My DVD Database</h1>
+
+  <input type="text" id="searchBox" placeholder="Search for a movie...">
+
+  <table id="dvdTable">
     <thead>
-      <tr><th>Title</th><th>Year</th><th>Format</th></tr>
+      <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Format</th>
+        <th>Notes</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td>The Matrix</td><td>1999</td><td>Blu-ray</td></tr>
-      <tr><td>Inception</td><td>2010</td><td>DVD</td></tr>
+      <tr>
+        <td>The Matrix</td>
+        <td>1999</td>
+        <td>DVD</td>
+        <td>Sci-fi classic</td>
+      </tr>
+      <tr>
+        <td>Inception</td>
+        <td>2010</td>
+        <td>Blu-ray</td>
+        <td>Dream heist</td>
+      </tr>
+      <tr>
+        <td>Toy Story</td>
+        <td>1995</td>
+        <td>DVD</td>
+        <td>Family/Animated</td>
+      </tr>
+      <!-- Add more rows here -->
     </tbody>
   </table>
+
+  <script>
+    const searchBox = document.getElementById('searchBox');
+    const rows = document.querySelectorAll('#dvdTable tbody tr');
+
+    searchBox.addEventListener('input', () => {
+      const query = searchBox.value.toLowerCase();
+      rows.forEach(row => {
+        const rowText = row.textContent.toLowerCase();
+        row.classList.toggle('hide', !rowText.includes(query));
+      });
+    });
+  </script>
 </body>
 </html>
